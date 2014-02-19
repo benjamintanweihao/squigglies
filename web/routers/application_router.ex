@@ -25,15 +25,15 @@ defmodule ApplicationRouter do
 
     Enum.each iterator, fn(element) ->
       { :ok, conn } = conn.chunk "data: #{element}\n\n"
-      await conn, 200, on_wake_up(&1, &2), on_time_out(&1)
+      await conn, 200, &on_wake_up(&1, &2), &on_time_out(&1)
     end
   end
 
-  defp on_wake_up(arg1, arg2) do
+  defp on_wake_up(_arg1, _arg2) do
     # Nothing
   end
 
-  defp on_time_out(arg1) do
+  defp on_time_out(_arg1) do
     # Nothing
   end
 end
